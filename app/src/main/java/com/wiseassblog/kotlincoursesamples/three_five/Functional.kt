@@ -1,9 +1,3 @@
-package com.wiseassblog.kotlincoursesamples.three_five
-
-/*
-Functional style Binomial Expression Calculator:
-Build a calculator than does not use any assignment statements or mutable state
- */
 fun main(args: Array<String>) {
     solveExpression(args)
 }
@@ -31,7 +25,7 @@ fun solveExpression(args: Array<String>) {
         return //stop execution here
     }
 
-    if (thirdIsNotValid(args[0])) {
+    if (thirdIsNotValid(args[2])) {
         println(getErrorMessage())
         return //stop execution here
     }
@@ -74,12 +68,10 @@ fun thirdIsNotValid(s: String): Boolean {
 
 /**
  * Valid strings must be convertable to doubles
+ * NOTE: There was a slight error in this function in the video, please use this version below. Thanks to Wiktor K. for pointing that out!
  */
 fun firstAndSecondNotValid(s: String, s1: String): Boolean {
-    if (s.toDoubleOrNull() == null) return true
-    if (s1.toDoubleOrNull() == null) return true
+   // The two vertical bars represent an "or" boolean statement. In English, it says "if (s cannot be converted to a double OR s1 cannot be converted to a double, return true)"
+    if (s.toDoubleOrNull() == null || s1.toDoubleOrNull() == null) return true
     return false
 }
-
-
-
