@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 class CalculatorLogicTest {
 
     private lateinit var viewFake: CalculatorViewFakeImpl
-    private lateinit var calc: CalculatorFakeImpl
+    private lateinit var calcFake: CalculatorFakeImpl
     private val dispatcher = Dispatchers.Unconfined
 
     lateinit var calculatorLogic: CalculatorLogic
@@ -21,18 +21,18 @@ class CalculatorLogicTest {
     /**
      * On Evaluate:
      * 1. Get current display state from View
-     * 2. Give state to calc for evaluation
+     * 2. Give state to calcFake for evaluation
      * 3. Verify callback invoked on View
      */
     @Test
     fun `On Evaluate event success`() {
         viewFake = CalculatorViewFakeImpl()
-        calc = CalculatorFakeImpl()
-        calc.succeed = true
+        calcFake = CalculatorFakeImpl()
+        calcFake.succeed = true
 
         calculatorLogic = CalculatorLogic(
             viewFake,
-            calc,
+            calcFake,
             dispatcher
         )
 
@@ -40,18 +40,17 @@ class CalculatorLogicTest {
 
         assertTrue(viewFake.getDisplayCalled)
         assertTrue(viewFake.setDisplayCalled)
-        assertTrue(calc.succeed)
     }
 
     @Test
     fun `On Evaluate event exception`() {
         viewFake = CalculatorViewFakeImpl()
-        calc = CalculatorFakeImpl()
+        calcFake = CalculatorFakeImpl()
 
 
         calculatorLogic = CalculatorLogic(
             viewFake,
-            calc,
+            calcFake,
             dispatcher
         )
 
@@ -59,7 +58,7 @@ class CalculatorLogicTest {
 
         assertTrue(viewFake.getDisplayCalled)
         assertTrue(viewFake.showErrorCalled)
-        assertFalse(calc.succeed)
+        assertFalse(calcFake.succeed)
     }
 
 
@@ -70,12 +69,12 @@ class CalculatorLogicTest {
     @Test
     fun `On Delete event`() {
         viewFake = CalculatorViewFakeImpl()
-        calc = CalculatorFakeImpl()
+        calcFake = CalculatorFakeImpl()
         viewFake.expression = "1"
 
         calculatorLogic = CalculatorLogic(
             viewFake,
-            calc,
+            calcFake,
             dispatcher
         )
 
@@ -94,13 +93,13 @@ class CalculatorLogicTest {
     @Test
     fun `On Delete All event`() {
         viewFake = CalculatorViewFakeImpl()
-        calc = CalculatorFakeImpl()
+        calcFake = CalculatorFakeImpl()
         viewFake.expression = "1+1"
 
 
         calculatorLogic = CalculatorLogic(
             viewFake,
-            calc,
+            calcFake,
             dispatcher
         )
 
@@ -118,11 +117,11 @@ class CalculatorLogicTest {
     @Test
     fun `On Input called`() {
         viewFake = CalculatorViewFakeImpl()
-        calc = CalculatorFakeImpl()
+        calcFake = CalculatorFakeImpl()
         viewFake.expression = "1"
         calculatorLogic = CalculatorLogic(
             viewFake,
-            calc,
+            calcFake,
             dispatcher
         )
 

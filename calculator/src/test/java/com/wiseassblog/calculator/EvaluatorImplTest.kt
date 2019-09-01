@@ -6,7 +6,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class EvaluatorTest {
+class EvaluatorImplTest {
 
     val eval = EvaluatorImpl
 

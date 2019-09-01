@@ -19,10 +19,6 @@ class CalculatorActivity : AppCompatActivity(),
     View.OnLongClickListener,
     ICalculatorUI.View {
 
-    companion object {
-        val DISPLAY_STATE = "STATE"
-    }
-
     lateinit var logic: ICalculatorUI.Logic
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,69 +30,63 @@ class CalculatorActivity : AppCompatActivity(),
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putString(DISPLAY_STATE,  lbl_display.text.toString())
-        super.onSaveInstanceState(outState)
-    }
-
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        lbl_display.text = savedInstanceState?.getString(DISPLAY_STATE, "")
-    }
-
     private fun bindUserInterface() {
-        btn_evaluate.setOnClickListener(this)
-        btn_decimal.setOnClickListener(this)
-        btn_display_delete.setOnClickListener(this)
-        btn_display_delete.setOnLongClickListener(this)
+        btnEvaluate.setOnClickListener(this)
+        btnDecimal.setOnClickListener(this)
+        btnDelete.setOnClickListener(this)
+        btnDelete.setOnLongClickListener(this)
 
-        btn_number_one.setOnClickListener(this)
-        btn_number_two.setOnClickListener(this)
-        btn_number_three.setOnClickListener(this)
-        btn_number_four.setOnClickListener(this)
-        btn_number_five.setOnClickListener(this)
-        btn_number_six.setOnClickListener(this)
-        btn_number_seven.setOnClickListener(this)
-        btn_number_eight.setOnClickListener(this)
-        btn_number_nine.setOnClickListener(this)
-        btn_number_zero.setOnClickListener(this)
+        btnOne.setOnClickListener(this)
+        btnTwo.setOnClickListener(this)
+        btnThree.setOnClickListener(this)
+        btnFour.setOnClickListener(this)
+        btnFive.setOnClickListener(this)
+        btnSix.setOnClickListener(this)
+        btnSeven.setOnClickListener(this)
+        btnEight.setOnClickListener(this)
+        btnNine.setOnClickListener(this)
+        btnZero.setOnClickListener(this)
 
-        btn_operator_add.setOnClickListener(this)
-        btn_operator_subtract.setOnClickListener(this)
-        btn_operator_multiply.setOnClickListener(this)
-        btn_operator_divide.setOnClickListener(this)
+        btnAdd.setOnClickListener(this)
+        btnSubtract.setOnClickListener(this)
+        btnMultiply.setOnClickListener(this)
+        btnDivide.setOnClickListener(this)
     }
 
-    /* --------- Interface Functions --------*/
-
-    override fun onLongClick(v: View?): Boolean {
-        when (v?.id) {
-            R.id.btn_display_delete -> logic.handleViewEvent(ViewEvent.DeleteAll)
-        }
-
-        return true
-    }
+    /* ----------- Interface Functions ----------*/
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_evaluate -> logic.handleViewEvent(ViewEvent.Evaluate)
-            R.id.btn_display_delete -> logic.handleViewEvent(ViewEvent.Delete)
+            R.id.btnEvaluate -> logic.handleViewEvent(ViewEvent.Evaluate)
+            R.id.btnDelete -> logic.handleViewEvent(ViewEvent.Delete)
             else -> {
-                if (v is Button) {
-                    logic.handleViewEvent(ViewEvent.Input(v.text.toString()))
+                if (v is Button){
+                    logic.handleViewEvent(ViewEvent.Input(
+                        v.text.toString()
+                    )
+                    )
                 }
             }
         }
     }
 
+    override fun onLongClick(v: View?): Boolean {
+        when (v?.id) {
+            R.id.btnDelete -> logic.handleViewEvent(ViewEvent.DeleteAll)
+        }
+
+        //return true if we don't want the onClick to be called next
+        return true
+    }
+
     override var display: String
-        get() = lbl_display.text.toString()
+        get() = lblDisplay.text.toString()
         set(value) {
-            lbl_display.text = value
+            lblDisplay.text = value
         }
 
     override fun showError(value: String) {
         Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
     }
+
 }

@@ -3,6 +3,4 @@
     <color name="colorPrimary">#616161</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#82B1FF</color>
-    <color name="windowBackground">#E3F2FD</color>
-    <color name="colorTransparentBlack">#8C000000</color>
 </resources>

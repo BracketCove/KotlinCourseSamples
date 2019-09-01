@@ -5,16 +5,16 @@ package com.wiseassblog.calculator.data
  * Created by R_KAY on 1/20/2018.
  */
 object ValidatorImpl : IValidator {
-    override suspend fun validateExpression(expression: String): Boolean {
+    override suspend fun validateExpression(exp: String): Boolean {
 
         //check for valid starting/ending chars
-        if (invalidStart(expression)) return false
-        if (invalidEnd(expression)) return false
+        if (invalidStart(exp)) return false
+        if (invalidEnd(exp)) return false
 
         //Check for concurrent decimals and operators like "2++2"
-        if (hasConcurrentOperators(expression)) return false
-        if (hasConcurrentDecimals(expression)) return false
-        if (hasTooManyDecimalsPerOperand(expression)) return false
+        if (hasConcurrentOperators(exp)) return false
+        if (hasConcurrentDecimals(exp)) return false
+        if (hasTooManyDecimalsPerOperand(exp)) return false
 
         return true
     }

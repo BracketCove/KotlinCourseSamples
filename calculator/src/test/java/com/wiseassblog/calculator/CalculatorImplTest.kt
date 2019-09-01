@@ -1,10 +1,11 @@
 package com.wiseassblog.calculator
 
-import com.wiseassblog.androidrestcalculator.CalculatorLogicFakeImpl
 import com.wiseassblog.calculator.data.CalculatorImpl
 import com.wiseassblog.calculator.data.IEvaluator
 import com.wiseassblog.calculator.data.IValidator
 import com.wiseassblog.calculator.domain.ResultWrapper
+import com.wiseassblog.calculator.userinterface.ICalculatorUI
+import com.wiseassblog.calculator.userinterface.ViewEvent
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.Test
 
 internal const val VALID_EXPRESSION: String = "2+2"
 internal const val VALID_ANSWER: String = "4"
-internal const val INVALID_EXPRESSION: String = "2+b"
+internal const val INVALID_EXPRESSION: String = "2+++"
 
 class CalculatorImplTest {
 
@@ -85,4 +86,20 @@ class EvaluatorFakeImpl : IEvaluator {
     internal var succeed: Boolean = true
     internal var called: Boolean = false
 
+}
+
+class CalculatorLogicFakeImpl : ICalculatorUI.Logic {
+
+    var viewEventCalled = false
+    var handleResultCalled = false
+    var result: ResultWrapper<Exception, String>? = null
+
+    override fun handleViewEvent(event: ViewEvent) {
+        viewEventCalled = true
+    }
+
+    override fun handleResult(result: ResultWrapper<Exception, String>) {
+        this.result = result
+        handleResultCalled = true
+    }
 }
