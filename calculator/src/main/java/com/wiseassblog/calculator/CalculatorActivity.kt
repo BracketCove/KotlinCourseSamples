@@ -53,6 +53,21 @@ class CalculatorActivity : AppCompatActivity(),
         btnDivide.setOnClickListener(this)
     }
 
+    companion object {
+        val DISPLAY_STATE = "STATE"
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString(DISPLAY_STATE,  lblDisplay.text.toString())
+        super.onSaveInstanceState(outState)
+    }
+
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        lblDisplay.text = savedInstanceState?.getString(DISPLAY_STATE, "")
+    }
+
     /* ----------- Interface Functions ----------*/
 
     override fun onClick(v: View?) {
