@@ -63,7 +63,7 @@ object EvaluatorImpl : IEvaluator {
         return when {
             firstOperator.evaluateFirst -> true
             secondOperator == null -> true
-            secondOperator.evaluateFirst -> true
+            secondOperator.evaluateFirst -> false
             else -> false
         }
     }
