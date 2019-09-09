@@ -12,7 +12,7 @@ class CalculatorImpl(
     override suspend fun evaluateExpression(
         exp: String,
         callback: (ResultWrapper<Exception, String>) -> Unit
-    ) {
+    ) = withContext(Dispatchers.IO) {
         if (validator.validateExpression(exp)) callback.invoke(evaluator.evaluateExpression(exp))
         else callback.invoke(ResultWrapper.build { throw Exception() })
     }

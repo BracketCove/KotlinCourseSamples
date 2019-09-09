@@ -23,11 +23,11 @@ class CalculatorActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calculator)
 
         logic = DependencyProvider.provideLogic(this)
         bindUserInterface()
 
+        setContentView(R.layout.activity_calculator)
     }
 
     private fun bindUserInterface() {

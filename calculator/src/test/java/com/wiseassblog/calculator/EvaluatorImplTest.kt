@@ -22,7 +22,7 @@ class EvaluatorImplTest {
         val resultOne = eval.evaluateExpression(VALID_EXPRESSION_ONE)
 
         if (resultOne is ResultWrapper.Success){
-            Assertions.assertEquals(resultOne.value, VALID_ANSWER_ONE)
+            Assertions.assertEquals(VALID_ANSWER_ONE, resultOne.value)
         } else {
             Assertions.assertTrue(false)
         }
@@ -30,11 +30,18 @@ class EvaluatorImplTest {
         val resultTwo = eval.evaluateExpression(VALID_EXPRESSION_TWO)
 
         if (resultTwo is ResultWrapper.Success){
-            Assertions.assertEquals(resultTwo.value, VALID_ANSWER_TWO)
+            Assertions.assertEquals(VALID_ANSWER_TWO, resultTwo.value)
         } else {
             Assertions.assertTrue(false)
         }
 
+        val resultThree = eval.evaluateExpression(VALID_EXPRESSION_THREE)
+
+        if (resultThree is ResultWrapper.Success){
+            Assertions.assertEquals(VALID_ANSWER_THREE, resultThree.value)
+        } else {
+            Assertions.assertTrue(false)
+        }
     }
 
 

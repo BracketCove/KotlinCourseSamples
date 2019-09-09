@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
  * Created by R_KAY on 12/21/2017.
  */
 object EvaluatorImpl : IEvaluator {
-    override suspend fun evaluateExpression(exp: String): ResultWrapper<Exception, String> = withContext(Dispatchers.IO) {
+    override suspend fun evaluateExpression(exp: String): ResultWrapper<Exception, String> {
         val operators: MutableList<Operator> = getOperators(exp)
         val operands: MutableList<Operand> = getOperands(exp)
 
@@ -51,7 +51,7 @@ object EvaluatorImpl : IEvaluator {
         }
 
         //Last exp in block is returned via Single Expression Syntax
-        ResultWrapper.build { operands[0].value }
+        return ResultWrapper.build { operands[0].value }
     }
 
     //if op is * or / (evaluateFirst), or no more operatorDataModels to follow,
