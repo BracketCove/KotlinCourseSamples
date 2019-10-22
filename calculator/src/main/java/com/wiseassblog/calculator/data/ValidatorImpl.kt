@@ -10,6 +10,7 @@ object ValidatorImpl : IValidator {
         //check for valid starting/ending chars
         if (invalidStart(exp)) return false
         if (invalidEnd(exp)) return false
+        if (invalidOperand(exp)) return false
 
         //Check for concurrent decimals and operators like "2++2"
         if (hasConcurrentOperators(exp)) return false
@@ -29,6 +30,20 @@ object ValidatorImpl : IValidator {
             }
 
             if (occurences > 1) return true
+        }
+
+        return false
+    }
+
+    /**
+     * Error initially found by G. Trandafir!
+     */
+    private fun invalidOperand(expression: String): Boolean {
+        val operands = expression.split("+", "-", "/", "*")
+
+        operands.forEach {operand -> String
+            if (operand.endsWith(".")) return true
+            if (operand.startsWith(".")) return true
         }
 
         return false
