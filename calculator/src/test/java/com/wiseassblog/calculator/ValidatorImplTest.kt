@@ -19,6 +19,7 @@ class ValidatorImplTest {
     val INVALID_EXPRESSION_THREE: String = "+1"
     val INVALID_EXPRESSION_FOUR: String = "2.."
     val INVALID_EXPRESSION_FIVE: String = "0.0.0 + 1"
+    val INVALID_EXPRESSION_SIX: String = "1.+0"
 
     @Test
     fun `Test Valid Expression`() = runBlocking {
@@ -57,6 +58,10 @@ class ValidatorImplTest {
         val resultFive = validator.validateExpression(INVALID_EXPRESSION_FIVE)
 
         assertFalse(resultFive)
+
+        val resultSix = validator.validateExpression(INVALID_EXPRESSION_SIX)
+
+        assertFalse(resultSix)
 
     }
 
